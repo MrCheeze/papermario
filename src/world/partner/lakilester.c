@@ -689,6 +689,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 z = npc->moveToPos.z;
                 if (partnerActionStatus->currentButtons & (L_TRIG)) {
                     npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, 25.0f, yaw, npc->collisionHeight, npc->collisionRadius);
+                } else if (partnerActionStatus->currentButtons & (R_TRIG)) {
+                    npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, 0.0f, yaw, npc->collisionHeight, npc->collisionRadius);
                 } else {
                     npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, 37.0f, yaw, npc->collisionHeight, npc->collisionRadius);
                 }
