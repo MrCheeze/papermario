@@ -543,7 +543,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
     f32 yaw, camYaw;
     s32 i;
 
-    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
+    /*playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
 
     if (isInitialCall) {
         func_802BD678_3211C8(npc);
@@ -677,7 +677,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             npc->flags |= (NPC_FLAG_400000 | NPC_FLAG_100);
             set_action_state(ACTION_STATE_RIDE);
             D_802BFF0C = 1;
-            func_800EF4E0();
+            func_800EF4E0();*/
             npc->moveToPos.x = playerStatus->position.x;
             npc->moveToPos.y = playerStatus->position.y;
             npc->moveToPos.z = playerStatus->position.z;
@@ -687,7 +687,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 x = npc->moveToPos.x;
                 y = npc->moveToPos.y;
                 z = npc->moveToPos.z;
-                npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, npc->moveSpeed,
+                npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, 25.0f,
                                                     yaw, npc->collisionHeight, npc->collisionRadius);
                 npc->moveToPos.x = x;
                 npc->moveToPos.y = y;
@@ -695,7 +695,9 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 yaw += 90.0f;
             }
 
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
+            fx_big_smoke_puff(x, y, z);
+
+            /*npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
             npc->duration = 12;
             npc->currentAnim.w = 0x80005;
             npc->jumpVelocity = 8.0f;
@@ -706,10 +708,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
         case 101:
             sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, NPC_PARTNER);
             suggest_player_anim_clearUnkFlag(0x10007);
-            /* fallthrough */
         case 102:
             D_802BFF14 += 1;
-            /* fallthrough */
         case 103:
             if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_800)) {
                 npc->pos.x += (npc->moveToPos.x - npc->pos.x) / npc->duration;
@@ -833,7 +833,6 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
         case 4:
             suggest_player_anim_clearUnkFlag(0x10007);
             D_802BFF14++;
-            /* fallthrough */
         case 5:
             gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
             playerStatus->position.y += npc->jumpVelocity;
@@ -912,7 +911,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             partner_clear_player_tracking(npc);
             func_800EF3D4(2);
             return ApiStatus_DONE1;
-        }
+        }*/
         return ApiStatus_BLOCK;
 }
 
