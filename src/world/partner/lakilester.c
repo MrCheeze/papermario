@@ -688,13 +688,13 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 y = npc->moveToPos.y;
                 z = npc->moveToPos.z;
                 if (partnerActionStatus->currentButtons & (L_TRIG)) {
-                    npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, 25.0f, yaw, npc->collisionHeight, npc->collisionRadius);
+                    npc->moveSpeed = 25.0f;
                 } else if (partnerActionStatus->currentButtons & (R_TRIG)) {
-                    npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, 37.0f, yaw, npc->collisionHeight, npc->collisionRadius);
+                    npc->moveSpeed = 54.0f;
                 } else {
                     npc->moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z) * 0.25f;
-                    npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, npc->moveSpeed, yaw, npc->collisionHeight, npc->collisionRadius);
                 }
+                npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, npc->moveSpeed, yaw, npc->collisionHeight, npc->collisionRadius);
                 npc->moveToPos.x = x;
                 npc->moveToPos.y = y;
                 npc->moveToPos.z = z;
@@ -705,6 +705,9 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
             if (partnerActionStatus->pressedButtons & D_CBUTTONS) {
 
+                playerStatus->position.x = npc->pos.x = x;
+                playerStatus->position.y = npc->pos.y = y;
+                playerStatus->position.z = npc->pos.z = z;
                 set_action_state(ACTION_STATE_FALLING);
                 gravity_use_fall_parms();
                 return ApiStatus_DONE1;
