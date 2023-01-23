@@ -690,7 +690,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 if (partnerActionStatus->currentButtons & (L_TRIG)) {
                     npc->moveSpeed = 25.0f;
                 } else if (partnerActionStatus->currentButtons & (R_TRIG)) {
-                    npc->moveSpeed = 54.0f;
+                    npc->moveSpeed = 20.0f;
                 } else {
                     npc->moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z) * 0.25f;
                 }
